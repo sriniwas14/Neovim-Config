@@ -21,7 +21,14 @@ return {
 			mapping = {
 				["<Up>"] = cmp.mapping.select_prev_item(),
 				["<Down>"] = cmp.mapping.select_next_item(),
-				["<Tab>"] = cmp.mapping.confirm({ select = true }),
+				-- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+				['<Tab>'] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					else
+						fallback()
+					end
+				end, { 'i', 's' }),
 				["<leader>s"] = cmp.mapping.complete(),
 			},
 			sources = {
