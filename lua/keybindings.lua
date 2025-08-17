@@ -8,7 +8,16 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { noremap = true, si
 
 vim.keymap.set("n", "<leader>p", ":Telescope find_files<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>g", ":Telescope live_grep<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>z", ":Telescope buffers<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>e", ":Trouble diagnostics toggle<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>gs", ":Gstatus<CR>", { desc = "Git status" })
+vim.keymap.set("n", "<leader>gd", ":Gdiffsplit<CR>", { desc = "Git diff split" })
+vim.keymap.set("n", "<leader>gb", ":Gblame<CR>", { desc = "Git blame" })
+vim.keymap.set("n", "<leader>gc", ":Git commit<CR>", { desc = "Git commit" })
+vim.keymap.set("n", "<leader>gp", ":Git push<CR>", { desc = "Git push" })
+
+vim.keymap.set("n", "<leader>e", ":Trouble diagnostics toggle<CR>", { noremap = true })
 
 vim.keymap.set("n", "<leader>m", function()
 	vim.lsp.buf.format({ bufnr = bufnr })
@@ -22,7 +31,22 @@ vim.keymap.set("n", "]", ":TabbyNext<CR>", { noremap = true })
 vim.keymap.set("n", "[", ":TabbyPrev<CR>", { noremap = true })
 
 
-vim.api.nvim_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'gd', function()
+  local params = vim.lsp.util.make_position_params()
+  vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result)
+    if result == nil or vim.tbl_isempty(result) then
+      print("No definition found")
+      return
+    end
+
+    -- If it's a list, go to the first location
+    local location = result[1] or result
+    vim.lsp.util.jump_to_location(location, 'utf-8')
+  end)
+end, { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
 
 local harpoon = require("harpoon")
