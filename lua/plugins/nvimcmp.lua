@@ -12,12 +12,10 @@ return {
 		local luasnip = require("luasnip")
 
 
-
 		cmp.setup({
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
-					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			mapping = {
@@ -31,7 +29,7 @@ return {
 						fallback()
 					end
 				end, { 'i', 's' }),
-				['<CR>'] = cmp.mapping.confirm({ select = true }),
+				['<CR>'] = cmp.mapping.confirm({ select = false }),
 				["<C-Space>"] = cmp.mapping.complete(),
 			},
 			sources = {
@@ -44,8 +42,8 @@ return {
 
 
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local cmp = require("cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			local cmp = require("cmp")
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-	end
+		end
 }

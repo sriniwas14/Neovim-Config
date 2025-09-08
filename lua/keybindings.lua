@@ -11,11 +11,13 @@ vim.keymap.set("n", "<leader>g", ":Telescope live_grep<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>z", ":Telescope buffers<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>e", ":Trouble diagnostics toggle<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>gs", ":Gstatus<CR>", { desc = "Git status" })
-vim.keymap.set("n", "<leader>gd", ":Gdiffsplit<CR>", { desc = "Git diff split" })
-vim.keymap.set("n", "<leader>gb", ":Gblame<CR>", { desc = "Git blame" })
-vim.keymap.set("n", "<leader>gc", ":Git commit<CR>", { desc = "Git commit" })
-vim.keymap.set("n", "<leader>gp", ":Git push<CR>", { desc = "Git push" })
+
+-- Fugitive
+vim.keymap.set("n", "<leader>Gs", ":Gstatus<CR>", { desc = "Git status" })
+vim.keymap.set("n", "<leader>Gd", ":Gdiffsplit<CR>", { desc = "Git diff split" })
+vim.keymap.set("n", "<leader>Gb", ":Gblame<CR>", { desc = "Git blame" })
+vim.keymap.set("n", "<leader>Gc", ":Git commit<CR>", { desc = "Git commit" })
+vim.keymap.set("n", "<leader>Gp", ":Git push<CR>", { desc = "Git push" })
 
 vim.keymap.set("n", "<leader>e", ":Trouble diagnostics toggle<CR>", { noremap = true })
 
